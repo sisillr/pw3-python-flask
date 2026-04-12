@@ -11,20 +11,111 @@
          flex-direction: column; /* empilha os elementos */ 
          justify-content: flex-start; /* alinha no topo */ 
          align-items: center; 
-         background: linear-gradient(to bottom, #1e1a8b, #ffffff); 
-         font-family: Garamond, serif; color: #1e1a8b; 
+         background-color:  #fff0dd; 
+         font-family: Garamond, serif; color: #181818; 
          text-align: center; 
-         padding-top: 40px; /* espaço no topo */ } 
-         h1 { font-size: 3rem; margin-bottom: 10px; } 
-         h2 { font-weight: normal; font-size: 1.5rem; opacity: 0.8; margin-top: 0; } 
-         hr { width: 60%; margin-top: 30px; border: 1px solid #1e1a8b; opacity: 0.5; } 
+         padding-top: 20px; /* espaço no topo */ } 
+         h1 { font-size: 3rem; 
+            margin-bottom: 0px;
+            margin-top: 0px;
+         } 
+         h2 { font-weight: normal; 
+            font-size: 1.5rem; 
+            opacity: 0.8; 
+            margin-top: 0; } 
+
+         hr { width: 80%; margin-top: 10px; border: 1px solid #000000; opacity: 0.5; } 
+
+         .imagem img {
+            width: 100px;
+            border-radius: 10px;
+            margin-top: 0px;
+            margin-left: 0px;
+            }
+
+        .imagem2 img {
+            height: 100px;
+            width: 300px;
+            border-radius: 3px;
+            margin-top: 0px;
+            margin-left: 0px;
+            }
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    flex-wrap: wrap; 
+}
+
+.card {
+    background-color: #4d9761;
+    padding: 15px; /* Um pouco mais de respiro */
+    border-radius: 10px;
+    width: 200px;
+   
+    /* Faz o card alinhar o conteúdo verticalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Garante que o texto fique embaixo e a imagem no topo */
+    align-items: center;
+
+}
+
+.card img {
+    width: 100%;       /* Ocupa a largura total do card (menos o padding) */
+    height: 250px;     /* Define uma altura fixa para todas as imagens ficarem iguais */
+    object-fit: cover; /* ESSENCIAL: Faz a imagem preencher o espaço sem distorcer */
+    background-color: white; /* O fundo branco para simular o efeito da foto */
+    border-radius: 8px;
+}
+
+.card p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #181818;
+    min-height: 40px; /* Garante que títulos longos não quebrem o alinhamento */
+    display: flex;
+    align-items: center;
+}
+        
          </style>
 
 </head>
 <body>
-    <h1>Bem-Vindo a página da Laufey</h1>
-    <h2>Um site para Laufeyers</h2>
+     <div class="imagem">
+        <img src="{{ url_for('static', filename='img/logo.png') }}">
+    </div>
+    <h1>Bem-Vindo ao Starbucks</h1>
+    
     <hr>
+    <h2>Prove o nosso melhor!</h2>
+<div class="container">
+
+        <div class="card">
+          <img src="{{ url_for('static', filename='img/img1.jpg') }}">
+            <p>Frappuccino de Caramelo</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='img/img2.png') }}">
+            <p>Frappuccino de Morango</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='img/img3.jpg') }}">
+            <p>Iced Coffee</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='img/img4.jpg') }}">
+            <p>Matcha Latte</p>
+        </div>
+
+    </div>
+
     
 </body>
 </html>

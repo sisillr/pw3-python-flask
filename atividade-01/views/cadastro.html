@@ -12,9 +12,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background: linear-gradient(to bottom, #131242, #1e1a8b);
+    background-color: #fff0dd;
     font-family: Garamond, serif;
-    color: #c3c1ff;
+    color: #181818;
     text-align: center;
     padding-top: 0px;
 }
@@ -22,18 +22,23 @@
 h1 {
     font-size: 2.5rem;
     margin-bottom: 0px;
-    
+    margin-top: -10px;
 }
+
+h2 { font-weight: normal; 
+            font-size: 1.5rem; 
+            opacity: 0.8; 
+            margin-top: 0; } 
 
 hr {
     width: 60%;
     margin-top: 20px;
-    border: 1px solid #c3c1ff;
+    border: 1px solid #2b2b2b;
     opacity: 0.5;
 }
 
 form {
-    margin-top: 30px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -44,29 +49,29 @@ label {
     font-size: 1rem;
     font-weight: bold;
     text-align: left;
-    color: #1e1a8b;
+    color: #1f5131;
 }
 
 input,
 textarea {
     padding: 10px;
-    border: 1px solid #1e1a8b;
+    border: 1px solid #326036;
     border-radius: 13px;
     font-family: Garamond, serif;
     font-size: 1rem;
-    color: #1e1a8b;
-    background-color: #c3c1ff;
+    color: #1f5131;
+    background-color: #fff0dd;
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #78779e;
+    color: #222222;
     opacity: 0.8;
 }
 
 button {
     padding: 10px;
-    background-color: #1e1a8b;
+    background-color: #4d9761;
     color: white;
     border: none;
     border-radius: 5px;
@@ -80,11 +85,31 @@ button:hover {
     background-color: #151266;
 }
 
+.imagem img {
+            width: 100px;
+            border-radius: 10px;
+            margin-top: 0px;
+            margin-left: 0px;
+            }
+
+        .imagem2 img {
+            height: 100px;
+            width: 300px;
+            border-radius: 3px;
+            margin-top: 0px;
+            margin-left: 0px;
+            }
+
+
     </style>
 
 </head>
 <body>
-    <h1>Laufey</h1>
+    <div class="imagem">
+        <img src="{{ url_for('static', filename='img/logo.png') }}">
+    </div>
+    <h1>Starbucks</h1>
+    <h2>Seja nosso cliente!</h2>
     <br> 
     <form> 
         <label for="nome">Nome:</label> 
@@ -93,7 +118,7 @@ button:hover {
         <input type="email" id="email" placeholder="Digite seu e-mail"> 
         <!-- Aqui estava a mensagem -->
         <label for="telefone">Telefone:</label> 
-        <textarea id="telefone" rows="4" placeholder="Digite seu telefone"></textarea> 
+        <textarea id="telefone" rows="1" placeholder="Digite seu telefone"></textarea> 
         <button type="submit">Enviar</button> 
     </form>
     
