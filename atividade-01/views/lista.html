@@ -7,130 +7,60 @@
 
     <style>
         body {
-            background-color: #fff0dd;
+            background-color: #1e1a8b;
             text-align: center;
             font-family: Garamond, serif;
         }
 
         h1 {
-            color: #151515;
+            color: #e6e8f4;
         }
-
-        h2 {
-            color: #151515;
-            margin-right: 1100px;
-            margin-top: 2%;
-        }
-
-       hr { width: 80%; margin-top: 10px; border: 1px solid #000000; opacity: 1; } 
-
 
         .container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 20px 0;
-    flex-wrap: wrap; 
-}
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
 
-.card {
-    background-color: #4d9761;
-    padding: 15px; /* Um pouco mais de respiro */
-    border-radius: 10px;
-    width: 200px;
-   
-    /* Faz o card alinhar o conteúdo verticalmente */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Garante que o texto fique embaixo e a imagem no topo */
-    align-items: center;
+        .card {
+            background-color: #e6e8f4;
+            width: 200px;
+            padding: 15px;
+            border-radius: 10px;
+        }
 
-}
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+        }
 
-.card img {
-    width: 100%;       /* Ocupa a largura total do card (menos o padding) */
-    height: 250px;     /* Define uma altura fixa para todas as imagens ficarem iguais */
-    object-fit: cover; /* ESSENCIAL: Faz a imagem preencher o espaço sem distorcer */
-    background-color: white; /* O fundo branco para simular o efeito da foto */
-    border-radius: 8px;
-}
-
-.card p {
-    margin-top: 15px;
-    font-size: 1.2rem;
-    color: #fff6f6;
-    min-height: 40px; /* Garante que títulos longos não quebrem o alinhamento */
-    display: flex;
-    align-items: center;
-}
-        
+        .card p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #1e1a8b;
+        }
     </style>
 </head>
 <body>
-
-    <h1>Produtos Populares</h1>
+    <h1>Músicas Populares</h1>
     <hr>
-    <h2>Drinks -</h2>
 
     <div class="container">
-
         <div class="card">
-          <img src="{{ url_for('static', filename='img/img1.jpg') }}">
-            <p>Frappuccino de Caramelo</p>
+          
+            <p>From The Start</p>
         </div>
 
         <div class="card">
-            <img src="{{ url_for('static', filename='img/img2.png') }}">
-            <p>Frappuccino de Morango</p>
+            
+            <p>Falling Behind</p>
         </div>
 
         <div class="card">
-            <img src="{{ url_for('static', filename='img/img3.jpg') }}">
-            <p>Iced Coffee</p>
+            
+            <p>Let You Break My Heart Again</p>
         </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img4.jpg') }}">
-            <p>Matcha Latte</p>
-        </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img5.jpg') }}">
-            <p>Frappuccino de Uva</p>
-        </div>
-
     </div>
-
-    <h2>Donuts -</h2>
-
-    <div class="container">
-
-        <div class="card">
-          <img src="{{ url_for('static', filename='img/img6.jpg') }}">
-            <p>Donuts de Chocolate</p>
-        </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img7.jpg') }}">
-            <p>Donuts de Morango</p>
-        </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img8.jpg') }}">
-            <p>Donuts de Red Velvet</p>
-        </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img9.jpg') }}">
-            <p>Donuts de Matcha</p>
-        </div>
-
-        <div class="card">
-            <img src="{{ url_for('static', filename='img/img10.jpg') }}">
-            <p>Donuts de Oreo</p>
-        </div>
-
-    </div>
-
 </body>
 </html>
