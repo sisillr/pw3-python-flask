@@ -15,6 +15,12 @@ app = Flask(__name__, template_folder='views')
 app.config['DATABASE_NAME'] = DB_NAME
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root@localhost/{DB_NAME}'
 
+# CRIANDO UMA CHAVE SECRETA (PARA FLASH MESSAGES E SESSÕES)
+app.config['SECRET_KEY'] = 'meusegredo'
+
+# DEFININDO O TEMPO DA SESSÃO (tempo que o cookie vai durar)
+app.config['PERMANENT_SESSION_LIFETIME'] = 3600 # 1 hora
+
 # Inicializando rotas
 routes.init_app(app)
 

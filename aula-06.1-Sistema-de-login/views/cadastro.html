@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<!-- BUSCANDO E EXIBINDO AS FLASH MESSAGES (usa para pegar mensagens que caem aqui)-->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+
+ {% for category, messsage in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ messsage }}
+    </div>
+ {% endfor %}
+ {% endwith %}
+
 <!-- FORMULARIO DE CADASTRO -->
  <div class="continer">
     <div class="card mt-4">

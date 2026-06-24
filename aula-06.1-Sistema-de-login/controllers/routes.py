@@ -1,8 +1,10 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash, session
+# Importando o Markup Safe (sem ele n dá pra inserir link)
+from markupsafe import Markup 
 from model.game import listar_games, adicionar_game
 from model.database import Game, Console, db, Usuario
 # Importando WERKZEUG
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def init_app(app):
 
@@ -109,7 +111,7 @@ def init_app(app):
             # Confirmando as alterações no banco
             db.session.commmit()
             return redirect(url_for('estoque'))
-            return render_template('editar-jogos.html', game=game)
+        return render_template('editar-jogos.html', game=game)
     
 
     @app.route('/estoque_consoles', methods=['GET', 'POST'])
@@ -150,6 +152,8 @@ def init_app(app):
 
         return redirect(url_for('estoque_consoles'))
     
+    # Cadastro de Usuario
+    
     @app.route('/cadastro', methods=['GET', 'POST'])
     def cadastro(): 
         # Verificando se o metodo é POST
@@ -157,6 +161,16 @@ def init_app(app):
             # Coletando os dados do Formulário
             email = request.form['email']
             senha = request.form['senha']
+            # VERIFICANDO SE O USUARIO JÁ EXISTE
+            # Buscando o usuário pelo e-mail
+            usuario = Usuario.query.filter_by(email=email).first()
+            # Verificando s eo usuário possui valor
+            if usuario:
+                msg = Markup("Usuário já cadastrado. Faça o <a href='/login'>Login</a>")
+                flash(msg, 'danger')
+                return redirect(url_for('cadastro'))
+
+                
             # GERANDO O HASH DE SENHA (CRIPTOGRAFIA)
             senha_criptografada = generate_password_hash(senha, method='scrypt')
             # Enviando os dados para o Model
@@ -164,9 +178,40 @@ def init_app(app):
             # Cadastrando no banco
             db.session.add(novo_usuario)
             db.session.commit()
-            return redirect(url_for('login'))
+            # Gerando a mesnsagem de sucesso
+            msgCad = Markup("Cadastro realizado com sucesso! Faça o <a href='/login'>Login</a>")
+            flash(msgCad, 'success')
+            return redirect(url_for('cadastro'))
         return render_template('cadastro.html')
     
     @app.route('/login', methods=['GET', 'POST'])
     def login():
-        return "Bem-vindo a página de Login!"
+        #VERIFICANDO SE O METODO É POST
+        if request.method == 'POST':
+            #COLETANDO OS DADOS DO USUÁRIO
+            email = request.form['email']
+            senha = request.form['senha']
+            #BUSCANDO O USUARIO NO BANCO
+            usuario = Usuario.query.filter_by(email=email).first()
+            # SE O USUARIO EXISTIR
+            if usuario:
+                #VERIFICANDO A SENHA (hash)
+                if check_password_hash(usuario.senha, senha):
+                    #AQUI SERA CRIADO A SESSÃO
+                    session['usuario_id'] = usuario.id
+                    session['usuario_email'] = usuario.email
+                    # Mensagemde feedback
+                    msgLogin = "Você foi autenticado com succeso! Bem-vindo!"
+                    flash(msgLogin, 'sucess')
+                    return redirect(url_for('home'))
+                
+                # CASO SENHA INCORRETA
+                else:
+                    flash('Falha nno login. Verifique os dados e tente novamente!', 'danger')
+            
+            # SE O USUARIO N FOR ENCONTRADO
+            else:
+                flash('O usuário informado não existe!', 'danger')
+                return redirect(url_for('login'))
+            
+        return render_template('login.html')
