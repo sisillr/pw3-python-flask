@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<!-- BUSCANDO E EXIBINDO AS FLASH MESSAGES (usa para pegar mensagens que caem aqui)-->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+
+ {% for category, messsage in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ messsage }}
+    </div>
+ {% endfor %}
+ {% endwith %}
+
+<main>
+
+  <h1>Bem-vindo ao The Games!</h1>
+
+  <img
+    src="{{url_for('static', filename='/imgs/games.webp')}}"
+    alt=""
+    width="720px"
+  />
+
+  <h3>Seu site favorito de jogos!</h3>
+  <hr />
+  
+</main>
+{% endblock content %}
