@@ -1,0 +1,407 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    :root {
+        --preto: #111111;
+        --dourado: #d4af37;
+        --dourado-claro: #f2d675;
+        --fundo: #f5f5f5;
+        --texto: #171717;
+        --texto-secundario: #666666;
+        --borda: #e2e2e2;
+    }
+
+    body {
+        background-color: var(--fundo) !important;
+    }
+
+    .cards-page {
+        min-height: calc(100vh - 140px);
+        padding: 60px 20px 80px;
+        background-color: var(--fundo);
+    }
+
+    .cards-header {
+        max-width: 720px;
+        margin: 0 auto 45px;
+        padding: 30px;
+        text-align: center;
+        background-color: var(--preto);
+        border-radius: 12px;
+    }
+
+    .cards-header h1 {
+        margin: 0 0 14px;
+        color: #ffffff;
+        font-family: Georgia, serif;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .cards-header h1::after {
+        content: "";
+        display: block;
+        width: 55px;
+        height: 3px;
+        margin: 16px auto 0;
+        background-color: var(--dourado);
+        border-radius: 5px;
+    }
+
+    .cards-header p {
+        max-width: 650px;
+        margin: 0 auto;
+        color: #d1d1d1;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .cambio-carousel {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 55px;
+    }
+
+    .carousel-window {
+        overflow: hidden;
+        border-radius: 14px;
+    }
+
+    .carousel-track {
+        display: flex;
+        transition: transform 0.45s ease;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .info-card {
+        position: relative;
+        min-height: 390px;
+        padding: 40px;
+        background-color: #ffffff;
+        border: 1px solid var(--borda);
+        border-radius: 14px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--dourado);
+    }
+
+    .card-icon {
+        width: 58px;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        background-color: var(--preto);
+        color: var(--dourado-claro);
+        border: 1px solid rgba(212, 175, 55, 0.55);
+        border-radius: 12px;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    .info-card h2 {
+        margin-bottom: 18px;
+        color: var(--preto);
+        font-size: 1.55rem;
+        font-weight: 700;
+    }
+
+    .info-card p {
+        margin-bottom: 14px;
+        color: var(--texto-secundario);
+        font-size: 0.95rem;
+        line-height: 1.75;
+    }
+
+    .info-card strong {
+        color: var(--preto);
+    }
+
+    .slide-number {
+        position: absolute;
+        top: 30px;
+        right: 35px;
+        color: #aaa;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--preto);
+        color: var(--dourado);
+        font-size: 25px;
+        font-weight: 300;
+        cursor: pointer;
+        z-index: 10;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-button:hover {
+        background-color: var(--dourado);
+        color: var(--preto);
+    }
+
+    .carousel-button:active {
+        transform: translateY(-50%) scale(0.94);
+    }
+
+    .carousel-prev {
+        left: 0;
+    }
+
+    .carousel-next {
+        right: 0;
+    }
+
+    .carousel-indicators-custom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 25px;
+    }
+
+    .carousel-dot {
+        width: 25px;
+        height: 4px;
+        padding: 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #cccccc;
+        cursor: pointer;
+        transition: background-color 0.2s ease, width 0.2s ease;
+    }
+
+    .carousel-dot.active {
+        width: 40px;
+        background-color: var(--dourado);
+    }
+
+    @media (max-width: 768px) {
+        .cards-page {
+            padding: 45px 15px 60px;
+        }
+
+        .cards-header {
+            padding: 25px 20px;
+        }
+
+        .cambio-carousel {
+            padding: 0 40px;
+        }
+
+        .info-card {
+            min-height: auto;
+            padding: 30px 25px;
+        }
+
+        .info-card h2 {
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            font-size: 0.9rem;
+        }
+
+        .slide-number {
+            top: 25px;
+            right: 25px;
+        }
+
+        .carousel-button {
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cards-header h1 {
+            font-size: 2rem;
+        }
+
+        .cambio-carousel {
+            padding: 0 30px;
+        }
+
+        .carousel-button {
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+        }
+    }
+</style>
+
+<main class="cards-page">
+    <div class="container">
+        <header class="cards-header">
+            <h1>Entenda o câmbio</h1>
+            <p>Informações simples para ajudar você a compreender melhor as moedas, suas cotações e o mercado de câmbio.</p>
+        </header>
+
+        <div class="cambio-carousel">
+            <div class="carousel-window">
+                <div class="carousel-track" id="carouselTrack">
+
+                    <div class="carousel-slide">
+                        <article class="info-card">
+                            <span class="slide-number">01 / 05</span>
+                            <div class="card-icon">$</div>
+                            <h2>Cotação das moedas</h2>
+                            <p>A <strong>cotação</strong> representa o valor de uma moeda em relação a outra. Por exemplo, quando comparamos o real com o dólar, estamos observando a relação de valor entre essas duas moedas.</p>
+                            <p>Esse valor não permanece necessariamente constante. As cotações podem mudar conforme as condições econômicas e as negociações realizadas no mercado.</p>
+                            <p>Por isso, uma moeda pode apresentar valores diferentes em momentos diferentes.</p>
+                        </article>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <article class="info-card">
+                            <span class="slide-number">02 / 05</span>
+                            <div class="card-icon">%</div>
+                            <h2>Taxa de câmbio</h2>
+                            <p>A <strong>taxa de câmbio</strong> representa a relação de valor entre duas moedas. Ela permite determinar quanto de uma moeda corresponde a determinada quantidade de outra.</p>
+                            <p>As taxas podem sofrer alterações ao longo do tempo devido às negociações e às condições do mercado financeiro.</p>
+                            <p>Essa taxa é utilizada para calcular o valor correspondente durante uma conversão.</p>
+                        </article>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <article class="info-card">
+                            <span class="slide-number">03 / 05</span>
+                            <div class="card-icon">R$</div>
+                            <h2>Real brasileiro</h2>
+                            <p>O <strong>Real (BRL)</strong> é a moeda oficial do Brasil. Seu símbolo é <strong>R$</strong> e ele é utilizado nas transações realizadas dentro do país.</p>
+                            <p>A relação do real com moedas estrangeiras pode mudar conforme diferentes fatores econômicos e financeiros.</p>
+                            <p>Por isso, o valor do real em relação ao dólar, euro e outras moedas pode variar ao longo do tempo.</p>
+                        </article>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <article class="info-card">
+                            <span class="slide-number">04 / 05</span>
+                            <div class="card-icon">US</div>
+                            <h2>Dólar americano</h2>
+                            <p>O <strong>dólar americano (USD)</strong> é uma das moedas mais utilizadas no comércio internacional e nos mercados financeiros.</p>
+                            <p>Sua importância faz com que alterações no cenário econômico internacional possam influenciar sua relação com outras moedas.</p>
+                            <p>No Brasil, o dólar é frequentemente utilizado como referência para operações internacionais e comparação de valores.</p>
+                        </article>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <article class="info-card">
+                            <span class="slide-number">05 / 05</span>
+                            <div class="card-icon">€</div>
+                            <h2>Euro</h2>
+                            <p>O <strong>euro (EUR)</strong> é utilizado por diversos países europeus e está entre as principais moedas do mercado internacional.</p>
+                            <p>Ele possui grande participação em operações comerciais e financeiras realizadas entre diferentes países.</p>
+                            <p>Assim como outras moedas, seu valor em relação ao real pode variar conforme as condições do mercado.</p>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="button" class="carousel-button carousel-prev" id="carouselPrev" aria-label="Slide anterior">‹</button>
+            <button type="button" class="carousel-button carousel-next" id="carouselNext" aria-label="Próximo slide">›</button>
+
+            <div class="carousel-indicators-custom">
+                <button type="button" class="carousel-dot active" data-slide="0" aria-label="Ir para slide 1"></button>
+                <button type="button" class="carousel-dot" data-slide="1" aria-label="Ir para slide 2"></button>
+                <button type="button" class="carousel-dot" data-slide="2" aria-label="Ir para slide 3"></button>
+                <button type="button" class="carousel-dot" data-slide="3" aria-label="Ir para slide 4"></button>
+                <button type="button" class="carousel-dot" data-slide="4" aria-label="Ir para slide 5"></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const track = document.getElementById("carouselTrack");
+        const prevButton = document.getElementById("carouselPrev");
+        const nextButton = document.getElementById("carouselNext");
+        const dots = document.querySelectorAll(".carousel-dot");
+        const totalSlides = dots.length;
+        let currentSlide = 0;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach(function (dot, index) {
+                dot.classList.toggle("active", index === currentSlide);
+            });
+        }
+
+        nextButton.addEventListener("click", function () {
+            currentSlide++;
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+            updateCarousel();
+        });
+
+        prevButton.addEventListener("click", function () {
+            currentSlide--;
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+            updateCarousel();
+        });
+
+        dots.forEach(function (dot) {
+            dot.addEventListener("click", function () {
+                currentSlide = parseInt(this.getAttribute("data-slide"));
+                updateCarousel();
+            });
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowRight") {
+                currentSlide++;
+                if (currentSlide >= totalSlides) {
+                    currentSlide = 0;
+                }
+                updateCarousel();
+            }
+
+            if (event.key === "ArrowLeft") {
+                currentSlide--;
+                if (currentSlide < 0) {
+                    currentSlide = totalSlides - 1;
+                }
+                updateCarousel();
+            }
+        });
+
+        updateCarousel();
+    });
+</script>
+
+{% endblock content %}

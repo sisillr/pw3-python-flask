@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        background-color: #f4f5f7;
+        color: #1a1a1a;
+    }
+
+   
+    .card-principal {
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem;
+    }
+
+    
+    .icone-cambio {
+        width: 56px;
+        height: 56px;
+        background: #fef08a; 
+        color: #854d0e;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    
+    .titulo-cambio {
+        font-family: 'Georgia', serif;
+        font-weight: 700;
+        color: #111827;
+        letter-spacing: -0.5px;
+    }
+
+    
+    .btn-dourado {
+        background-color: #111827;
+        color: #fef08a;
+        border: 1px solid #111827;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-dourado:hover {
+        background-color: #d97706; 
+        border-color: #d97706;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6 text-center">
+            
+            <div class="card-principal my-4">
+                <div class="icone-cambio">
+                    ⇄
+                </div>
+                
+                <h1 class="titulo-cambio display-6 mb-2">CambioGo</h1>
+                <p class="text-secondary fw-medium mb-3">
+                    Conversor de moedas simples, rápido e fácil de usar.
+                </p>
+
+                <p class="text-muted small mb-4 px-md-3">
+                    Converta valores entre diferentes moedas de forma prática e consulte as taxas de câmbio para facilitar suas transações e planejamentos financeiros.
+                </p>
+
+                <a href="{{ url_for('apimoedas') }}" class="btn btn-dourado shadow-sm">
+                    Acessar conversor
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
