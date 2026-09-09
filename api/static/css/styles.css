@@ -56,3 +56,88 @@ img {
   color: #111111;
   background-color: rgba(0, 0, 0, 0.05);
 }
+/* Área do formulário */
+details {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transition: 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+details:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* Título do formulário */
+summary {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+    margin-bottom: 15px;
+    list-style: none;
+}
+
+/* Formulário */
+form {
+    padding: 10px;
+}
+
+/* Campo de texto */
+form input[type="text"] {
+    width: 100%;
+    padding: 13px 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+/* Campo quando selecionado */
+form input[type="text"]:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.15);
+}
+
+/* Botões */
+form input[type="submit"],
+form input[type="reset"] {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-right: 8px;
+}
+
+/* Botão cadastrar */
+form input[type="submit"] {
+    background: #198754;
+    color: white;
+}
+
+form input[type="submit"]:hover {
+    background: #146c43;
+    transform: translateY(-2px);
+}
+
+/* Botão limpar */
+form input[type="reset"] {
+    background: #dc3545;
+    color: white;
+}
+
+form input[type="reset"]:hover {
+    background: #bb2d3b;
+    transform: translateY(-2px);
+}

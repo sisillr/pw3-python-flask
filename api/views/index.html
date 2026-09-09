@@ -2,87 +2,254 @@
 
 {% block content %}
 
+<!-- Bootstrap Icons -->
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 <style>
     body {
         background-color: #f4f5f7;
-        color: #1a1a1a;
+        color: #111827;
     }
 
-   
-    .card-principal {
+    /* Container geral */
+    .container-cambiogo {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.25rem 5rem;
+    }
+
+    /* =========================
+       CARD SOBRE A API
+    ========================= */
+
+    .api-card {
         background: #ffffff;
-        border-radius: 16px;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        padding: 2.5rem;
+        border-radius: 18px;
+        padding: 3rem;
+        border: 1px solid rgba(17, 24, 39, 0.05);
+        box-shadow: 0 15px 40px rgba(17, 24, 39, 0.06);
+        margin-bottom: 2.5rem;
     }
 
-    
-    .icone-cambio {
-        width: 56px;
-        height: 56px;
-        background: #fef08a; 
+    /* Ícone de moeda */
+    .api-icone {
+        width: 58px;
+        height: 58px;
+        background: #fef08a;
         color: #854d0e;
         border-radius: 50%;
-        display: inline-flex;
+
+        display: flex;
         align-items: center;
         justify-content: center;
+
         font-size: 1.5rem;
+
+        margin: 0 auto 1.25rem;
+    }
+
+    .api-titulo {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #111827;
+        letter-spacing: -0.6px;
         margin-bottom: 1rem;
     }
 
-    
-    .titulo-cambio {
-        font-family: 'Georgia', serif;
-        font-weight: 700;
-        color: #111827;
-        letter-spacing: -0.5px;
+    .api-subtitulo {
+        color: #6b7280;
+        font-size: 1rem;
+        line-height: 1.8;
+        max-width: 650px;
+        margin: 0 auto;
     }
 
-    
+    /* Detalhe dourado */
+    .api-detalhe {
+        width: 45px;
+        height: 3px;
+        background: #d4a72c;
+        border-radius: 10px;
+        margin: 1.5rem auto 1.25rem;
+    }
+
+    /* Imagem */
+    .api-imagem-wrapper {
+        margin-top: 2rem;
+        overflow: hidden;
+        border-radius: 14px;
+        background: #f8f8f8;
+    }
+
+    .api-imagem {
+        width: 100%;
+        height: 280px;
+        display: block;
+        object-fit: cover;
+    }
+
+
+    /* =========================
+       CARD PRINCIPAL
+    ========================= */
+
+    .card-principal {
+        background: #ffffff;
+        border-radius: 18px;
+        border: 1px solid rgba(17, 24, 39, 0.05);
+        box-shadow: 0 15px 40px rgba(17, 24, 39, 0.06);
+        padding: 3.5rem 2.5rem;
+    }
+
+    .icone-cambio {
+        width: 58px;
+        height: 58px;
+        background: #fef08a;
+        color: #854d0e;
+        border-radius: 50%;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1.5rem;
+        font-weight: 600;
+
+        margin-bottom: 1.25rem;
+    }
+
+    .titulo-cambio {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 700;
+        color: #111827;
+        letter-spacing: -0.8px;
+    }
+
+    .descricao-cambio {
+        color: #6b7280;
+        line-height: 1.7;
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
     .btn-dourado {
         background-color: #111827;
         color: #fef08a;
         border: 1px solid #111827;
-        padding: 0.75rem 2rem;
+
+        padding: 0.8rem 2rem;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 9px;
+
         transition: all 0.2s ease;
     }
 
     .btn-dourado:hover {
-        background-color: #d97706; 
+        background-color: #d97706;
         border-color: #d97706;
         color: #ffffff;
         transform: translateY(-2px);
     }
+
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 768px) {
+
+        .container-cambiogo {
+            padding-top: 2rem;
+        }
+
+        .api-card {
+            padding: 2rem 1.5rem;
+        }
+
+        .api-titulo {
+            font-size: 1.7rem;
+        }
+
+        .api-imagem {
+            height: 220px;
+        }
+
+        .card-principal {
+            padding: 2.5rem 1.5rem;
+        }
+    }
 </style>
 
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 text-center">
-            
-            <div class="card-principal my-4">
-                <div class="icone-cambio">
-                    ⇄
-                </div>
-                
-                <h1 class="titulo-cambio display-6 mb-2">CambioGo</h1>
-                <p class="text-secondary fw-medium mb-3">
-                    Conversor de moedas simples, rápido e fácil de usar.
-                </p>
 
-                <p class="text-muted small mb-4 px-md-3">
-                    Converta valores entre diferentes moedas de forma prática e consulte as taxas de câmbio para facilitar suas transações e planejamentos financeiros.
-                </p>
+<div class="container-cambiogo">
 
-                <a href="{{ url_for('apimoedas') }}" class="btn btn-dourado shadow-sm">
-                    Acessar conversor
-                </a>
-            </div>
+    <!-- =========================
+         SOBRE A API
+    ========================== -->
 
+    <div class="api-card text-center">
+
+        <!-- ÍCONE DE MOEDA -->
+        <div class="api-icone">
+            <i class="bi bi-coin"></i>
         </div>
+
+        <h2 class="api-titulo">
+            Sobre o CambioGo
+        </h2>
+
+        <div class="api-detalhe"></div>
+
+        <p class="api-subtitulo">
+             O aplicativo foi desenvolvido para fornecer dados de câmbio em tempo real de forma precisa e segura. Se conecte às cotações atualizadas do mercado e facilite a conversão do seu dinheiro com a aplicação.
+        </p>
+
+        <div class="api-imagem-wrapper">
+            <img
+                src="{{ url_for('static', filename='imgs/dinheiro1.webp') }}"
+                alt="Dinheiro e passaporte"
+                class="api-imagem"
+            >
+        </div>
+
     </div>
+
+
+    <!-- =========================
+         CARD PRINCIPAL DO CAMBIOGO
+    ========================== -->
+
+    <div class="card-principal text-center">
+
+        <div class="icone-cambio">
+            ⇄
+        </div>
+
+        <h1 class="titulo-cambio display-6 mb-2">
+            CambioGo
+        </h1>
+
+        <p class="text-secondary fw-medium mb-3">
+            Conversor de moedas simples, rápido e fácil de usar.
+        </p>
+
+        <p class="descricao-cambio small mb-4">
+            Converta valores entre diferentes moedas de forma prática
+            e consulte as taxas de câmbio para facilitar suas
+            transações e planejamentos financeiros.
+        </p>
+
+        <a
+            href="{{ url_for('apimoedas') }}"
+            class="btn btn-dourado shadow-sm"
+        >
+            Acessar conversor
+        </a>
+
+    </div>
+
 </div>
 
 {% endblock content %}
